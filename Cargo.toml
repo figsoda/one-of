@@ -1,0 +1,15 @@
+[package]
+name = "one-of"
+version = "0.1.0"
+authors = ["figsoda <figsoda@pm.me>"]
+edition = "2018"
+description = ""
+documentation = "https://docs.rs/one-of"
+readme = "README.md"
+homepage = "https://github.com/figsoda/one-of"
+repository = "https://github.com/figsoda/one-of"
+license = "MPL-2.0"
+keywords = []
+categories = []
+
+[dependencies]
