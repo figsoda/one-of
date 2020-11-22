@@ -3,7 +3,7 @@
 //!
 //! ## Usage
 //!
-//! ```rust
+//! ```
 //! use one_of::one_of;
 //!
 //! // either `u32` or `char`
@@ -183,7 +183,7 @@ gen_types!(
 /// ## Examples
 ///
 /// ### either `u32` or `char`
-/// ```rust
+/// ```
 /// # use one_of::one_of;
 /// let x: one_of!(u32, char) = 42.into();
 /// assert_eq!(Some(42u32), x.into());
@@ -191,7 +191,7 @@ gen_types!(
 /// ```
 ///
 /// ### some type of integer
-/// ```rust
+/// ```
 /// # use one_of::one_of;
 /// let x: one_of!(i8, i16, i32, i64, u8, u16, u32, u64) = 42.into();
 /// assert_eq!(Option::<i8>::None, x.into());
