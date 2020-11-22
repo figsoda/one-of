@@ -1,4 +1,4 @@
-//! Macro to represent a type that can be converted either `From` or `Into` the given types
+//! Macro to represent a type that can be converted either [`From`] or [`Into`] the given types
 //!
 //!
 //! ## Usage
@@ -174,9 +174,9 @@ gen_types!(
     }
 );
 
-/// Represents a type that can be converted either `From` or `Into` the given types
+/// Represents a type that can be converted either [`From`] or [`Into`] the given types
 ///
-/// Also conditionally implements `Clone`, `Copy`, `Debug`, `Eq`, `Hash` and `PartialEq`
+/// Also conditionally implements [`Clone`], [`Copy`], [`Debug`](core::fmt::Debug), [`Eq`], [`Hash`](core::hash::Hash) and [`PartialEq`]
 ///
 /// Accepts at least 2 types, up to 12 types
 ///
