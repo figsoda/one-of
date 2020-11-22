@@ -1,3 +1,33 @@
+//! Macro to represents a type that can be converted either `From` or `Into` the given types
+//!
+//!
+//! ## Usage
+//!
+//! ```rust
+//! use one_of::one_of;
+//!
+//! // either `u32` or `char`
+//! let x: one_of!(u32, char) = 42.into();
+//! assert_eq!(Some(42u32), x.into());
+//! assert_eq!(Option::<char>::None, x.into());
+//!
+//! // integer literal defaults to `i32` in rust
+//! let x: one_of!(i8, i16, i32, i64, u8, u16, u32, u64) = 42.into();
+//! assert_eq!(Option::<i8>::None, x.into());
+//! assert_eq!(Option::<i16>::None, x.into());
+//! assert_eq!(Some(42i32), x.into());
+//! assert_eq!(Option::<i64>::None, x.into());
+//! assert_eq!(Option::<u8>::None, x.into());
+//! assert_eq!(Option::<u16>::None, x.into());
+//! assert_eq!(Option::<u32>::None, x.into());
+//! assert_eq!(Option::<u64>::None, x.into());
+//! ```
+//!
+//!
+//! ## Changelog
+//!
+//! See [CHANGELOG.md](https://github.com/figsoda/one-of/blob/main/CHANGELOG.md)
+
 #![feature(negative_impls)]
 #![feature(optin_builtin_traits)]
 #![no_std]
@@ -143,6 +173,35 @@ gen_types!(
     }
 );
 
+/// Represents a type that can be converted either `From` or `Into` the given types
+///
+/// Also conditionally implements `Clone`, `Copy`, `Debug`, `Eq`, `Hash` and `PartialEq`
+///
+/// Accepts at least 2 types, up to 12 types
+///
+/// ## Examples
+///
+/// ### either `u32` or `char`
+/// ```rust
+/// # use one_of::one_of;
+/// let x: one_of!(u32, char) = 42.into();
+/// assert_eq!(Some(42u32), x.into());
+/// assert_eq!(Option::<char>::None, x.into());
+/// ```
+///
+/// ### some type of integer
+/// ```rust
+/// # use one_of::one_of;
+/// let x: one_of!(i8, i16, i32, i64, u8, u16, u32, u64) = 42.into();
+/// assert_eq!(Option::<i8>::None, x.into());
+/// assert_eq!(Option::<i16>::None, x.into());
+/// assert_eq!(Some(42i32), x.into());
+/// assert_eq!(Option::<i64>::None, x.into());
+/// assert_eq!(Option::<u8>::None, x.into());
+/// assert_eq!(Option::<u16>::None, x.into());
+/// assert_eq!(Option::<u32>::None, x.into());
+/// assert_eq!(Option::<u64>::None, x.into());
+/// ```
 #[macro_export]
 macro_rules! one_of {
     ($a:ty, $b:ty) => {
