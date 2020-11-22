@@ -9,7 +9,7 @@ macro_rules! not {
 }
 
 #[test]
-fn i32_or_char() {
+fn u32_or_char() {
     let x: one_of!(u32, char) = 42.into();
     assert_eq!(Some(42u32), x.into());
     assert_eq!(not!(char), x.into());
