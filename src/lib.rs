@@ -30,8 +30,7 @@
 //!
 //! See [CHANGELOG.md](https://github.com/figsoda/one-of/blob/main/CHANGELOG.md)
 
-#![feature(negative_impls)]
-#![feature(optin_builtin_traits)]
+#![feature(negative_impls, optin_builtin_traits)]
 #![forbid(unsafe_code)]
 #![no_std]
 
