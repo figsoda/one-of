@@ -1,6 +1,7 @@
+#![feature(type_ascription)]
 #![no_std]
 
-use one_of::one_of;
+use one_of::{case, one_of};
 
 macro_rules! not {
     ($t:ty) => {
@@ -26,4 +27,56 @@ fn some_type_of_integer() {
     assert_eq!(not!(u16), x.into());
     assert_eq!(not!(u32), x.into());
     assert_eq!(not!(u64), x.into());
+}
+
+#[test]
+fn case() {
+    case!(<one_of!(i8, i64, u8, u64) as From<u64>>::from(42),
+        // i8
+        _ => {
+            panic!("not i8");
+        };
+
+        // i64
+        _ => {
+            panic!("not i64");
+        };
+
+        // u8
+        _ => {
+            panic!("not u8");
+        };
+
+        // u64
+        0 ..= 41 => {
+            panic!("not less than 42");
+        }
+
+        n => {
+            assert_eq!(n, 42);
+        };
+    );
+}
+
+#[test]
+fn case_guards() {
+    case!(<one_of!(bool, &str, i64) as From<_>>::from("Hello, world!"),
+        // bool
+        _ => {
+            panic!("not bool");
+        };
+
+        // &str
+        s if s.starts_with("Hello, ") => {
+            assert_eq!(&s[7 ..], "world!");
+        }
+        _ => {
+            panic!("not other strings")
+        };
+
+        // i64
+        _ => {
+            panic!("not i64")
+        };
+    );
 }

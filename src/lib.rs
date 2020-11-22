@@ -239,3 +239,120 @@ macro_rules! one_of {
         $crate::OneOf12<$a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k, $l>
     };
 }
+
+macro_rules! gen_case {
+    ($d:tt $($t:ty { $($v:ident $p:ident $g:ident $b:ident,)* })+) => {
+        #[macro_export]
+        macro_rules! case {
+            $(
+                ($d x:expr, $($d ($d $p:pat $d (if $d $g:expr)? => $d $b:block)+ ;)+) => {
+                    match $d x {
+                        $($d ($crate::$t::$v($d $p) $d (if $d $g)? => $d $b)+)+
+                    }
+                };
+            )+
+        }
+    };
+}
+
+gen_case!($
+    OneOf2 {
+        A pa ga ba,
+        B pb gb bb,
+    }
+    OneOf3 {
+        A pa ga ba,
+        B pb gb bb,
+        C pc gc bc,
+    }
+    OneOf4 {
+        A pa ga ba,
+        B pb gb bb,
+        C pc gc bc,
+        D pd gd bd,
+    }
+    OneOf5 {
+        A pa ga ba,
+        B pb gb bb,
+        C pc gc bc,
+        D pd gd bd,
+        E pe ge be,
+    }
+    OneOf6 {
+        A pa ga ba,
+        B pb gb bb,
+        C pc gc bc,
+        D pd gd bd,
+        E pe ge be,
+        F pf gf bf,
+    }
+    OneOf7 {
+        A pa ga ba,
+        B pb gb bb,
+        C pc gc bc,
+        D pd gd bd,
+        E pe ge be,
+        F pf gf bf,
+        G pg gg bg,
+    }
+    OneOf8 {
+        A pa ga ba,
+        B pb gb bb,
+        C pc gc bc,
+        D pd gd bd,
+        E pe ge be,
+        F pf gf bf,
+        G pg gg bg,
+        H ph gh bh,
+    }
+    OneOf9 {
+        A pa ga ba,
+        B pb gb bb,
+        C pc gc bc,
+        D pd gd bd,
+        E pe ge be,
+        F pf gf bf,
+        G pg gg bg,
+        H ph gh bh,
+        I pi gi bi,
+    }
+    OneOf10 {
+        A pa ga ba,
+        B pb gb bb,
+        C pc gc bc,
+        D pd gd bd,
+        E pe ge be,
+        F pf gf bf,
+        G pg gg bg,
+        H ph gh bh,
+        I pi gi bi,
+        J pj gj bj,
+    }
+    OneOf11 {
+        A pa ga ba,
+        B pb gb bb,
+        C pc gc bc,
+        D pd gd bd,
+        E pe ge be,
+        F pf gf bf,
+        G pg gg bg,
+        H ph gh bh,
+        I pi gi bi,
+        J pj gj bj,
+        K pk gk bk,
+    }
+    OneOf12 {
+        A pa ga ba,
+        B pb gb bb,
+        C pc gc bc,
+        D pd gd bd,
+        E pe ge be,
+        F pf gf bf,
+        G pg gg bg,
+        H ph gh bh,
+        I pi gi bi,
+        J pj gj bj,
+        K pk gk bk,
+        L pl gl bl,
+    }
+);
