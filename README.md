@@ -21,7 +21,6 @@ assert_eq!(Some(42u32), x.into());
 assert_eq!(Option::<char>::None, x.into());
 
 // some type of integer
-// integer literal defaults to `i32` in rust
 let x: one_of!(i8, i16, i32, i64, u8, u16, u32, u64) = 42.into();
 assert_eq!(Option::<i8>::None, x.into());
 assert_eq!(Option::<i16>::None, x.into());
