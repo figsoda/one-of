@@ -31,7 +31,7 @@ fn some_type_of_integer() {
 
 #[test]
 fn case() {
-    case!(<one_of!(i8, i64, u8, u64) as From<u64>>::from(42),
+    case!(<one_of!(i8, i64, u8, u64)>::from(42u64),
         // i8
         _ => {
             panic!("not i8");
@@ -59,7 +59,7 @@ fn case() {
 
 #[test]
 fn case_guards() {
-    case!(<one_of!(bool, &str, i64) as From<_>>::from("Hello, world!"),
+    case!(<one_of!(bool, &str, i64)>::from("Hello, world!"),
         // bool
         _ => {
             panic!("not bool");
