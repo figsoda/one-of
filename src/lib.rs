@@ -1,4 +1,4 @@
-//! Macro to represents a type that can be converted either `From` or `Into` the given types
+//! Macro to represent a type that can be converted either `From` or `Into` the given types
 //!
 //!
 //! ## Usage
