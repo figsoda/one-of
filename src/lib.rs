@@ -20,19 +20,15 @@ macro_rules! gen_types {
             }
 
             $(
-                impl<$($l,)* $v $(,$r)*> From<$v> for $n<$($l,)* $v $(,$r)*>
-                    where
-                        $(($v, $l): Different,)*
-                        $(($v, $r): Different,)* {
+                impl<$($l,)* $v $(,$r)*> From<$v> for $n<$($l,)* $v $(,$r)*> where
+                    $(($v, $l): Different,)* $(($v, $r): Different,)* {
                     fn from(x: $v) -> Self {
                         Self::$v(x)
                     }
                 }
 
-                impl<$($l,)* $v $(,$r)*> Into<Option<$v>> for $n<$($l,)* $v $(,$r)*>
-                    where
-                        $(($v, $l): Different,)*
-                        $(($v, $r): Different,)* {
+                impl<$($l,)* $v $(,$r)*> Into<Option<$v>> for $n<$($l,)* $v $(,$r)*> where
+                    $(($v, $l): Different,)* $(($v, $r): Different,)* {
                     fn into(self) -> Option<$v> {
                         match self {
                             Self::$v(x) => Some(x),
