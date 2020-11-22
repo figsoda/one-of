@@ -7,6 +7,8 @@
 
 Macro to represent a type that can be converted either `From` or `Into` the given types
 
+This crate only works on the nightly version of Rust
+
 [Documentation](https://docs.rs/one-of)
 
 
