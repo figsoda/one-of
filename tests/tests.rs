@@ -51,7 +51,6 @@ fn case() {
         0 ..= 41 => {
             panic!("not less than 42");
         }
-
         n => {
             assert_eq!(n, 42);
         };
