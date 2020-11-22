@@ -30,6 +30,7 @@
 
 #![feature(negative_impls)]
 #![feature(optin_builtin_traits)]
+#![forbid(unsafe_code)]
 #![no_std]
 
 // https://github.com/rust-lang/rust/issues/30905#issuecomment-173327799
