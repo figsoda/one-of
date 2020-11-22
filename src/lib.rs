@@ -35,7 +35,6 @@
 #![no_std]
 
 // https://github.com/rust-lang/rust/issues/30905#issuecomment-173327799
-#[doc(hidden)]
 mod internal {
     pub auto trait Different {}
     impl<T> !Different for (T, T) {}
