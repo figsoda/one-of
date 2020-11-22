@@ -11,5 +11,3 @@ repository = "https://github.com/figsoda/one-of"
 license = "MPL-2.0"
 keywords = []
 categories = []
-
-[dependencies]
