@@ -1,6 +1,12 @@
 # Changelog
 
 
+## v0.2.0 - 2020-11-23
+
+## Features
+- `case` macro to match against `one_of` types
+
+
 ## v0.1.0 - 2020-11-22
 
 ### Features
