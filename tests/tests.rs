@@ -70,12 +70,12 @@ fn case_guards() {
             assert_eq!(&s[7 ..], "world!");
         }
         _ => {
-            panic!("not other strings")
+            panic!("not other strings");
         };
 
         // i64
         _ => {
-            panic!("not i64")
+            panic!("not i64");
         };
     );
 }
