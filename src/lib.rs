@@ -6,7 +6,7 @@
 //! ## Usage
 //!
 //! ```
-//! use one_of::one_of;
+//! use one_of::{case, one_of};
 //!
 //! // either `u32` or `char`
 //! let x: one_of!(u32, char) = 42.into();
@@ -23,6 +23,27 @@
 //! assert_eq!(Option::<u16>::None, x.into());
 //! assert_eq!(Option::<u32>::None, x.into());
 //! assert_eq!(Option::<u64>::None, x.into());
+//!
+//! // case macro is the `match` keyword for `one_of` types
+//! case!(<one_of!(bool, &str, i64)>::from("Hello, world!"),
+//!     // bool
+//!     _ => {
+//!         panic!("not bool");
+//!     };
+//!
+//!     // &str
+//!     s if s.starts_with("Hello, ") => {
+//!         assert_eq!(&s[7 ..], "world!");
+//!     }
+//!     _ => {
+//!         panic!("not other strings");
+//!     };
+//!
+//!     // i64
+//!     _ => {
+//!         panic!("not i64");
+//!     };
+//! );
 //! ```
 //!
 //!
@@ -242,6 +263,94 @@ macro_rules! one_of {
 
 macro_rules! gen_case {
     ($d:tt $($t:ty { $($v:ident $p:ident $g:ident $b:ident,)* })+) => {
+        /// Pattern matching against [`one_of`] types, similar to `match`
+        ///
+        /// Groups of match arms are separated by `;`
+        ///
+        /// Unlike `match`, [`case`] only blocks are excepted as values of match arms
+        ///
+        /// ## Examples
+        ///
+        /// ### matching against one of the integer types
+        /// ```
+        /// use one_of::{case, one_of};
+        /// case!(<one_of!(i8, i64, u8, u64)>::from(42u64),
+        ///     // i8
+        ///     _ => {
+        ///         panic!("not i8");
+        ///     };
+        ///
+        ///     // i64
+        ///     _ => {
+        ///         panic!("not i64");
+        ///     };
+        ///
+        ///     // u8
+        ///     _ => {
+        ///         panic!("not u8");
+        ///     };
+        ///
+        ///     // u64
+        ///     0 ..= 41 => {
+        ///         panic!("not less than 42");
+        ///     }
+        ///     n => {
+        ///         assert_eq!(n, 42);
+        ///     };
+        /// );
+        /// ```
+        ///
+        /// ### gaurds are also supported, just like `match`
+        /// ```
+        /// # use one_of::{case, one_of};
+        /// case!(<one_of!(bool, &str, i64)>::from("Hello, world!"),
+        ///     // bool
+        ///     _ => {
+        ///         panic!("not bool");
+        ///     };
+        ///
+        ///     // &str
+        ///     s if s.starts_with("Hello, ") => {
+        ///         assert_eq!(&s[7 ..], "world!");
+        ///     }
+        ///     _ => {
+        ///         panic!("not other strings");
+        ///     };
+        ///
+        ///     // i64
+        ///     _ => {
+        ///         panic!("not i64");
+        ///     };
+        /// );
+        /// ```
+        /// this is the equivalent using `match` and a custom enum
+        /// ```
+        /// enum BoolStrOrInt<'a> {
+        ///     Bool(bool),
+        ///     Str(&'a str),
+        ///     Int(i64),
+        /// }
+        ///
+        /// match BoolStrOrInt::Str("Hello, world!") {
+        ///     // bool
+        ///     BoolStrOrInt::Bool(_) => {
+        ///         panic!("not bool");
+        ///     }
+        ///
+        ///     // &str
+        ///     BoolStrOrInt::Str(s) if s.starts_with("Hello, ") => {
+        ///         assert_eq!(&s[7 ..], "world!");
+        ///     }
+        ///     BoolStrOrInt::Str(_) => {
+        ///         panic!("not other strings");
+        ///     }
+        ///
+        ///     // i64
+        ///     BoolStrOrInt::Int(_) => {
+        ///         panic!("not i64");
+        ///     }
+        /// }
+        /// ```
         #[macro_export]
         macro_rules! case {
             $(
