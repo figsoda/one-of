@@ -267,7 +267,7 @@ macro_rules! gen_case {
         ///
         /// Groups of match arms are separated by `;`
         ///
-        /// Unlike `match`, [`case`] only blocks are excepted as values of match arms
+        /// Unlike `match`, [`case`] only accepts blocks as values of match arms
         ///
         /// ## Examples
         ///
