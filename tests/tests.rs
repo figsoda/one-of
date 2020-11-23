@@ -1,4 +1,3 @@
-#![feature(type_ascription)]
 #![no_std]
 
 use one_of::{case, one_of};
