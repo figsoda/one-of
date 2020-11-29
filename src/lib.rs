@@ -55,6 +55,8 @@
 #![forbid(unsafe_code)]
 #![no_std]
 
+use core::fmt::{Display, Formatter, Result};
+
 // https://github.com/rust-lang/rust/issues/30905#issuecomment-173327799
 mod internal {
     pub auto trait Different {}
@@ -69,6 +71,14 @@ macro_rules! gen_types {
             #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
             pub enum $n<$($v),+> {
                 $($v($v)),+
+            }
+
+            impl<$($v: Display),+> Display for $n<$($v),+> {
+                fn fmt(&self, f: &mut Formatter) -> Result {
+                    match self {
+                        $(Self::$v(x) => write!(f, "{}", x)),+
+                    }
+                }
             }
 
             $(
@@ -197,7 +207,7 @@ gen_types!(
 
 /// Represents a type that can be converted either [`From`] or [`Into`] the given types
 ///
-/// Also conditionally implements [`Clone`], [`Copy`], [`Debug`](core::fmt::Debug), [`Eq`], [`Hash`](core::hash::Hash) and [`PartialEq`]
+/// Also conditionally implements [`Clone`], [`Copy`], [`Debug`](core::fmt::Debug), [`Display`], [`Eq`], [`Hash`](core::hash::Hash) and [`PartialEq`]
 ///
 /// Accepts at least 2 types, up to 12 types
 ///
