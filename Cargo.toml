@@ -1,6 +1,6 @@
 [package]
 name = "one-of"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["figsoda <figsoda@pm.me>"]
 edition = "2018"
 description = "Macro to represent a type that can be converted either `From` or `Into` the given types"
