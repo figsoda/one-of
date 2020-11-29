@@ -51,7 +51,7 @@
 //!
 //! See [CHANGELOG.md](https://github.com/figsoda/one-of/blob/main/CHANGELOG.md)
 
-#![feature(negative_impls, optin_builtin_traits)]
+#![feature(auto_traits, negative_impls)]
 #![forbid(unsafe_code)]
 #![no_std]
 
