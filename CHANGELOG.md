@@ -1,6 +1,12 @@
 # Changelog
 
 
+## v0.2.1 - 2020-11-29
+
+## Features
+- Implement `Display` trait for `one_of` types
+
+
 ## v0.2.0 - 2020-11-23
 
 ## Features
