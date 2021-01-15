@@ -57,4 +57,4 @@ case!(<one_of!(bool, &str, i64)>::from("Hello, world!"),
 
 ## Changelog
 
-See [CHANGELOG.md](https://github.com/figsoda/one-of/blob/main/CHANGELOG.md)
+See [CHANGELOG.md](CHANGELOG.md)
