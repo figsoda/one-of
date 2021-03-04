@@ -29,6 +29,14 @@ fn some_type_of_integer() {
 }
 
 #[test]
+fn try_into() {
+    use core::convert::TryInto;
+    let x: one_of!(bool, &str) = true.into();
+    assert_eq!(Ok(true), x.try_into());
+    assert_eq!(Result::<&str, _>::Err(()), x.try_into());
+}
+
+#[test]
 fn case() {
     case!(<one_of!(i8, i64, u8, u64)>::from(42u64),
         // i8

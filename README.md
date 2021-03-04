@@ -4,7 +4,7 @@
 [![license](https://img.shields.io/badge/license-MPL--2.0-blue?style=flat-square)](https://www.mozilla.org/en-US/MPL/2.0)
 [![ci](https://img.shields.io/github/workflow/status/figsoda/one-of/ci?label=ci&logo=github-actions&style=flat-square)](https://github.com/figsoda/one-of/actions?query=workflow:ci)
 
-Macro to represent a type that can be converted either `From` or `Into` the given types
+Macro to represent a type that can be converted either `From` or `TryInto` the given types
 
 This crate only works on the nightly version of Rust
 

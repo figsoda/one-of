@@ -1,4 +1,4 @@
-//! Macro to represent a type that can be converted either [`From`] or [`Into`] the given types
+//! Macro to represent a type that can be converted either [`From`] or [`TryInto`] the given types
 //!
 //! This crate only works on the nightly version of Rust
 //!
@@ -55,7 +55,10 @@
 #![forbid(unsafe_code)]
 #![no_std]
 
-use core::fmt::{Display, Formatter, Result};
+use core::{
+    convert::TryInto,
+    fmt::{self, Display, Formatter},
+};
 
 // https://github.com/rust-lang/rust/issues/30905#issuecomment-173327799
 mod internal {
@@ -74,7 +77,7 @@ macro_rules! gen_types {
             }
 
             impl<$($v: Display),+> Display for $n<$($v),+> {
-                fn fmt(&self, f: &mut Formatter) -> Result {
+                fn fmt(&self, f: &mut Formatter) -> fmt::Result {
                     match self {
                         $(Self::$v(x) => write!(f, "{}", x)),+
                     }
@@ -95,6 +98,18 @@ macro_rules! gen_types {
                         match x {
                             $n::$v(x) => Some(x),
                             _ => None,
+                        }
+                    }
+                }
+
+                impl<$($l,)* $v $(,$r)*> TryInto<$v> for $n<$($l,)* $v $(,$r)*> where
+                    $(($v, $l): Different,)* $(($v, $r): Different,)* {
+                    type Error = ();
+
+                    fn try_into(self) -> Result<$v, Self::Error> {
+                        match self {
+                            $n::$v(x) => Ok(x),
+                            _ => Err(()),
                         }
                     }
                 }
@@ -205,7 +220,7 @@ gen_types!(
     }
 );
 
-/// Represents a type that can be converted either [`From`] or [`Into`] the given types
+/// Represents a type that can be converted either [`From`] or [`TryInto`] the given types
 ///
 /// Also conditionally implements [`Clone`], [`Copy`], [`Debug`](core::fmt::Debug), [`Display`], [`Eq`], [`Hash`](core::hash::Hash) and [`PartialEq`]
 ///
