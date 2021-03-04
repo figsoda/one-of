@@ -1,6 +1,12 @@
 # Changelog
 
 
+## v0.2.3 - 2020-03-04
+
+## Features
+- Implement `TryInto` trait for `one_of` types
+
+
 ## v0.2.2 - 2020-11-29
 
 ## Features
