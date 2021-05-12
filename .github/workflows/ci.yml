@@ -19,7 +19,7 @@ jobs:
           default: true
 
       - name: Cargo test
-        uses: actions-rs/cargo@v1
+        uses: actions-rs/cargo@v1.0.3
         with:
           command: test
 
@@ -39,7 +39,7 @@ jobs:
           default: true
 
       - name: Cargo clippy
-        uses: actions-rs/cargo@v1
+        uses: actions-rs/cargo@v1.0.3
         with:
           command: clippy
           args: -- -D warnings
@@ -60,7 +60,7 @@ jobs:
           default: true
 
       - name: Cargo fmt
-        uses: actions-rs/cargo@v1
+        uses: actions-rs/cargo@v1.0.3
         with:
           command: fmt
           args: -- --check
